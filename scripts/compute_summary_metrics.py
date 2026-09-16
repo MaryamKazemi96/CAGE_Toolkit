@@ -15,26 +15,17 @@ from pathlib import Path
 import numpy as np
 
 
-# ---------------------------------------------------------------------
-# Paths
-# ---------------------------------------------------------------------
 
 INPUT = Path("results/thor_metrics")
 OUTPUT = INPUT / "dataset_metrics.json"
 
 
-# ---------------------------------------------------------------------
-# Excluded recordings
-# ---------------------------------------------------------------------
 
 EXCLUDED_RECORDINGS = {
     (4, 1),
 }
 
 
-# ---------------------------------------------------------------------
-# Metrics
-# ---------------------------------------------------------------------
 
 METRICS = [
     "tracking_duration",
@@ -43,9 +34,6 @@ METRICS = [
     "motion_speed",
     "minimum_distance_between_people",
     "perception_noise_savgol",
-# "motion_speed_nonoverlap",
-
-# "motion_speed_frame_step",
 
 ]
 
@@ -64,15 +52,7 @@ def load_json(path: Path) -> dict:
 def pooled_statistics(
     groups: list[tuple[float, float, int]],
 ) -> dict:
-    """
-    Pool mean/std/n from independent groups.
 
-    Each group is represented as:
-
-        (mean, std, n)
-
-    The resulting std is the population standard deviation.
-    """
 
     if not groups:
 
@@ -183,9 +163,7 @@ def main():
                 continue
 
 
-            # Load recording metrics
-            # -----------------------------------------------------
-
+            
             data = load_json(path)
 
             included += 1
@@ -278,7 +256,6 @@ def main():
     )
 
 
-# ---------------------------------------------------------------------
 
 if __name__ == "__main__":
     main()

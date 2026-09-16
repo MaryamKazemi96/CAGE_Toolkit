@@ -27,3 +27,16 @@ env/
 # Temporary files
 *.tmp
 *.log
+
+
+#images
+*.png
+
+#image olders
+images/
+rosbag_figures/
+
+
+#test scricpts
+scripts/find_optitrack_offset.py
+scripts/make_item_diagnostic.py

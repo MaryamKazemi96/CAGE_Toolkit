@@ -15,12 +15,10 @@ from src.inspect.quality_check import (
     save_quality_report,
 )
 
-# ---------------------------------------------------------------------
 
 OUTPUT = Path("results/anomalies")
 OUTPUT.mkdir(parents=True, exist_ok=True)
 
-# ---------------------------------------------------------------------
 
 loader =  DatasetLoader(
     root="data/OptiTrack/solved",

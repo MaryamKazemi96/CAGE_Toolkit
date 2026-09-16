@@ -1,35 +1,3 @@
-"""
-Compute the recording-level summary table used in the paper
-(Table III: per-session overview, Table IV: per-session-per-scenario detail).
-
-For every (session, scenario) recording this script reports:
-
-    - density              (low / high, from config)
-    - n_participants        (number of humans configured for that scenario)
-    - duration_s            (wall-clock duration the scenario was actually recorded)
-    - human_tracks          (number of humans with a non-empty presence interval)
-    - robot_tracks          (number of robots with a non-empty presence interval)
-    - frames                (number of motion-capture frames spanned by the recording)
-
-"duration_s" is computed from *presence*, not from the raw take length: it is the
-time between the first body entering the tracking volume and the last body
-leaving it (matching how a participant/robot is actually "in the scene").
-"frames" is the corresponding frame span (end_frame - start_frame + 1) using the
-Frame column, so it lines up with the "Frames (120 Hz)" column in Table III/IV.
-
-Usage
------
-    python scripts/compute_session_summary.py
-
-Outputs
--------
-    results/session_summary/scenario_summary.csv   (one row per session x scenario -> Table IV)
-    results/session_summary/session_summary.csv     (one row per session          -> Table III)
-    results/session_summary/tables.tex              (LaTeX-ready rows for both tables)
-
-Run this from the repository root (same place you run the other scripts, e.g.
-scripts/compute_thor_metrics.py) so that "data/..." and "config/..." resolve.
-"""
 
 from __future__ import annotations
 
@@ -38,13 +6,6 @@ from pathlib import Path
 
 from src.io.loader import DatasetLoader
 from src.preprocessing.presence import detect_presence
-
-# ---------------------------------------------------------------------
-# Paths — adjust ROOT_RAW if your raw data lives somewhere else.
-# Presence is always detected on the RAW data (matches check_quality.py /
-# compute_thor_metrics.py convention), since "solved" data has already been
-# gap-filled and no longer reflects when a body truly entered/left the room.
-# ---------------------------------------------------------------------
 
 ROOT_RAW = "data/OptiTrack/raw"
 CONFIG = "config/recordings.yaml"
@@ -137,10 +98,6 @@ def main() -> None:
         writer.writeheader()
         writer.writerows(scenario_rows)
 
-    # --- aggregate to per-session CSV (Table III) ---------------------------
-    # Session duration = sum of the 4 scenario durations (total recording time).
-    # human_tracks / robot_tracks reported as the max observed across that
-    # session's scenarios (a body only needs to appear once to count).
 
     sessions: dict[int, dict] = {}
 
@@ -175,8 +132,6 @@ def main() -> None:
         writer = csv.DictWriter(f, fieldnames=list(session_rows[0].keys()))
         writer.writeheader()
         writer.writerows(session_rows)
-
-    # --- write LaTeX-ready rows so you can paste straight into Table III/IV -
 
     tex_path = OUTPUT / "tables.tex"
 
