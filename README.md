@@ -5,7 +5,7 @@
 <p align="center">
   <img src="environment.jpg" alt="CAGE tracking environment" width="500">
 </p>
-<p align="center"> <em>Overview of the experimental environment used for CAGE data collection.</em> </p>
+<p align="center"> <em>Overview of the experimental environment used for data collection.</em> </p>
 
 ## Features
 
