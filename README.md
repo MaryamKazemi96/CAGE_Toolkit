@@ -110,7 +110,6 @@ The toolkit computes:
 * Trajectory curvature
 * Perception noise
 * Minimum distance between people
-
 ### Visualize Trajectories
 
 ```bash
@@ -119,10 +118,11 @@ python scripts/plot_scenario_trajectories.py
 
 Additional visualization scripts are available in the `scripts/` directory.
 
-Loading a Recording in Python
+### Loading a Recording in Python
 
-The toolkit provides a DatasetLoader for accessing individual recordings.
+The toolkit provides a `DatasetLoader` for accessing individual recordings.
 
+```python
 from pathlib import Path
 
 from src.io.loader import DatasetLoader
@@ -141,6 +141,7 @@ print(recording["session"])
 print(recording["scenario"])
 print(recording["humans"])
 print(recording["robots"])
+```
 
 The loader handles the dataset configuration and coordinate normalization before returning the recording data.
 
@@ -148,6 +149,7 @@ The loader handles the dataset configuration and coordinate normalization before
 
 The typical processing workflow is:
 
+```text
 OptiTrack recordings
         │
         ▼
@@ -170,8 +172,9 @@ Trajectory metrics
         │
         ▼
 Visualization & analysis
+```
 
-Each stage can also be used independently through the modules in src/.
+Each stage can also be used independently through the modules in `src/`.
 
 ## Visualization
 
@@ -179,13 +182,17 @@ The repository contains scripts for visualizing trajectories, metrics, sensor da
 
 Examples include:
 
+```bash
 python scripts/plot_scenario_trajectories.py
 python scripts/plot_min_human_distance.py
 python scripts/plot_thor_metrics.py
+```
 
 For ROS bag sensor visualization:
 
+```bash
 python scripts/plot_rosbag_sensors.py
+```
 
 ## Survey Analysis
 
@@ -193,14 +200,19 @@ The toolkit also contains utilities for processing and analyzing participant sur
 
 The main components are:
 
+```text
 src/survey/
 ├── data.py
 ├── plots.py
 └── stats.py
+```
 
 Survey analysis can be run using:
 
+```bash
 python scripts/analyze_survey.py
+```
+
 
 ## Paper
 
