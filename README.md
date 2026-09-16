@@ -3,7 +3,7 @@
 **Tools for processing, inspecting, and analyzing human and robot trajectories from the CAGE dataset.**
 
 <p align="center">
-  <img src="environment.png" alt="CAGE tracking environment" width="700">
+  <img src="environment.jpg" alt="CAGE tracking environment" width="700">
 </p>
 
 ## Features
