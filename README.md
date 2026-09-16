@@ -3,9 +3,9 @@
 **Tools for processing, inspecting, and analyzing human and robot trajectories from the CAGE dataset.**
 
 <p align="center">
-  <img src="environment.jpg" alt="CAGE tracking environment" width="700">
+  <img src="environment.jpg" alt="CAGE tracking environment" width="500">
 </p>
-
+<p align="center"> <em>Overview of the experimental environment used for CAGE data collection.</em> </p>
 ## Features
 
 * Parse OptiTrack CSV recordings
