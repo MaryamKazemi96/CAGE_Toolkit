@@ -23,7 +23,7 @@ CONFIG = "config/recordings.yaml"
 OUTPUT = Path("results/paper_figures")
 OUTPUT.mkdir(parents=True, exist_ok=True)
 
-ARENA_MAP_PATH = "data/figures/arena_layout.png"
+ARENA_MAP_PATH = "data/figures/env5.png"
 ARENA_MAP_EXTENT = (-4.6, 6.282, -3.1920, 3.058)  # (xmin, xmax, ymin, ymax) in meters
 
 ADDITIONAL_OBSTACLE_REGIONS = [
@@ -127,8 +127,8 @@ def main() -> None:
 
         fig = plot_session_scenarios(solved_loader, raw_loader, session, scenario_ids)
 
-        fig.savefig(OUTPUT / f"Newsession_{session}_scenarios.png", dpi=300, bbox_inches="tight")
-        fig.savefig(OUTPUT / f"Newsession_{session}_scenarios.pdf", bbox_inches="tight")
+        fig.savefig(OUTPUT / f"session_{session}_scenarios.png", dpi=300, bbox_inches="tight")
+        fig.savefig(OUTPUT / f"session_{session}_scenarios.pdf", bbox_inches="tight")
         plt.close(fig)
 
    

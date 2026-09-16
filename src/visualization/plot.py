@@ -120,7 +120,7 @@ def plot_scene(
         ax.imshow(
             img,
             extent=background_extent,
-            origin="lower",
+            origin="upper",
             aspect="auto",
             zorder=0,
         )
