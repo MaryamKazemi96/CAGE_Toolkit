@@ -119,34 +119,89 @@ python scripts/plot_scenario_trajectories.py
 
 Additional visualization scripts are available in the `scripts/` directory.
 
-## Project Structure
+Loading a Recording in Python
 
-```text
-tracking-toolkit/
-├── config/
-│   ├── recordings.yaml
-│   └── schema.py
-│
-├── scripts/
-│   ├── analyze_survey.py
-│   ├── check_quality.py
-│   ├── compute_session_summary.py
-│   ├── compute_summary_metrics.py
-│   ├── compute_thor_metrics.py
-│   ├── inspect_dataset.py
-│   ├── plot_min_human_distance.py
-│   ├── plot_rosbag_sensors.py
-│   ├── plot_scenario_trajectories.py
-│   └── plot_thor_metrics.py
-│
-└── src/
-    ├── inspect/
-    ├── io/
-    ├── metrics/
-    ├── preprocessing/
-    ├── survey/
-    └── visualization/
-```
+The toolkit provides a DatasetLoader for accessing individual recordings.
+
+from pathlib import Path
+
+from src.io.loader import DatasetLoader
+
+loader = DatasetLoader(
+    root=Path("data/OptiTrack/solved"),
+    config_path=Path("config/recordings.yaml"),
+)
+
+recording = loader.load(
+    session=1,
+    scenario=3,
+)
+
+print(recording["session"])
+print(recording["scenario"])
+print(recording["humans"])
+print(recording["robots"])
+
+The loader handles the dataset configuration and coordinate normalization before returning the recording data.
+
+## Processing Pipeline
+
+The typical processing workflow is:
+
+OptiTrack recordings
+        │
+        ▼
+     Parsing
+        │
+        ▼
+Coordinate normalization
+        │
+        ▼
+Human / robot detection
+        │
+        ▼
+Trajectory trimming
+        │
+        ▼
+Tracking quality checks
+        │
+        ▼
+Trajectory metrics
+        │
+        ▼
+Visualization & analysis
+
+Each stage can also be used independently through the modules in src/.
+
+## Visualization
+
+The repository contains scripts for visualizing trajectories, metrics, sensor data, and experimental recordings.
+
+Examples include:
+
+python scripts/plot_scenario_trajectories.py
+python scripts/plot_min_human_distance.py
+python scripts/plot_thor_metrics.py
+
+For ROS bag sensor visualization:
+
+python scripts/plot_rosbag_sensors.py
+
+## Survey Analysis
+
+The toolkit also contains utilities for processing and analyzing participant survey data.
+
+The main components are:
+
+src/survey/
+├── data.py
+├── plots.py
+└── stats.py
+
+Survey analysis can be run using:
+
+python scripts/analyze_survey.py
+
 ## Paper
 
 For details about the dataset, experimental setup, and analysis, please see the  paper:
